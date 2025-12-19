@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JHOSH PACLEB</title>
+
+<style>
+/* ====== RESET & BASE ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', 'Arial', sans-serif; /* Rounded/Chubby font */
+    font-weight: 700; /* Thicker text globally */
+    background: #18191A; /* FB dark mode color */
+    color: #E4E6EB;
+    text-align: center;
+    overflow-x: hidden;
+    text-shadow: 2px 2px 0 #000; /* Chubby/outlined effect for all text */
+}
+h1, h2, h3, h4, h5, h6, p, span, a, button {
+    text-shadow: 2px 2px 0 #000; /* Ensure all elements have outline */
+}
+
+/* Make headings extra bold */
+h1 { font-weight: 900; margin-bottom: 20px; }
+h2 { font-weight: 800; margin-bottom: 20px; }
+
+/* ====== NAVIGATION ====== */
+.nav {
+    background: #242526;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-bottom: 3px solid #3A3B3C;
+}
+.nav button {
+    background: #3A3B3C;
+    color: #E4E6EB;
+    font-size: 20px;
+    font-weight: 900;
+    padding: 10px 25px;
+    margin: 10px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.nav button:hover {
+    background: #4E4F50;
+    box-shadow: 0 0 15px #2D88FF;
+    transform: scale(1.1);
+}
+
+/* ====== SECTIONS ====== */
+.section {
+    display: none;
+    padding: 60px 20px;
+    min-height: 80vh;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+.section.active {
+    display: block;
+    opacity: 1;
+}
+
+/* ====== HOME ====== */
+#home {
+    background: linear-gradient(135deg, #18191A, #242526);
+}
+#home h1 {
+    font-size: 50px;
+    line-height: 1.5;
+}
+
+/* ====== AUTOBIOGRAPHY ====== */
+#auto {
+    background: #242526;
+    position: relative;
+}
+#auto img {
+    width: 80%;
+    max-width: 700px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+#auto img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #2D88FF;
+}
+
+/* ====== GALLERY ====== */
+#gallery {
+    background: #18191A;
+}
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 30px;
+    position: relative;
+}
+.gallery img {
+    width: 300px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+.gallery img:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 30px #2D88FF;
+}
+/* Number overlay */
+.img-number {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(45,136,255,0.8);
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 5px 10px;
+    border-radius: 50%;
+}
+
+/* ====== SONG ====== */
+#song {
+    background: #242526;
+}
+#song img {
+    width: 80%;
+    max-width: 700px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+#song img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #2D88FF;
+}
+/* Updated button-like link with outline */
+.song-link {
+    display: inline-block;
+    background: #3A3B3C;
+    color: #E4E6EB;
+    font-size: 20px;
+    font-weight: 900;
+    padding: 10px 25px;
+    margin: 20px 0;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.song-link:hover {
+    background: #4E4F50;
+    box-shadow: 0 0 15px #2D88FF;
+    transform: scale(1.1);
+}
+
+/* ====== VIDEO ====== */
+#video {
+    background: #18191A;
+}
+video {
+    width: 80%;
+    max-width: 1000px;
+    border-radius: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+video:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px #2D88FF;
+}
+
+/* ====== MODAL ====== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 15px;
+    transition: transform 0.3s;
+}
+.modal img:hover {
+    transform: scale(1.05);
+}
+.modal .close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    font-size: 50px;
+    color: #2D88FF;
+    cursor: pointer;
+}
+.modal .close:hover {
+    color: #fff;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+    .gallery img {
+        width: 45%;
+        height: auto;
+    }
+    #auto img, #song img, video {
+        width: 90%;
+    }
+    .nav button {
+        padding: 8px 15px;
+        font-size: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<div class="nav">
+    <button onclick="show('home')">HOME</button>
+    <button onclick="show('auto')">MY AUTOBIOGRAPHY</button>
+    <button onclick="show('gallery')">MY GALLERY</button>
+    <button onclick="show('song')">MY SONG</button>
+    <button onclick="show('video')">MY VIDEO</button>
+</div>
+
+<!-- HOME -->
+<div id="home" class="section active">
+    <h1>I AM JHOSH EARL PACLEB<br>WELCOME TO MY WEBPAGE :></h1>
+</div>
+
+<!-- AUTOBIOGRAPHY -->
+<div id="auto" class="section">
+    <h1>MY AUTOBIOGRAPHY</h1>
+    <div class="autobio-text" style="max-width: 800px; margin: 0 auto; text-align: left; line-height: 1.6; font-weight: 500; font-size: 18px;">
+        <p><strong>Jhosh Earl H Pacleb: A Journey of Growth</strong></p>
+
+        <p><strong>I. The Roots (8/24/2002)</strong><br>
+        I was born in Antipolo during a time when my family were young and still discovering things together. Growing up in the Philippines and Australia, my early years were defined by constantly adjusting and improving. My family taught me the value of hard work and kindness, which became the foundation of who I am today.</p>
+
+        <p><strong>II. The Shaping Years</strong><br>
+        During my school years at Dazsma (Year 2016), I discovered my passion for writing. It wasn’t always easy; I faced challenges, such as finding topics in every possible way, which taught me to appreciate the small things. One turning point in my life was in grade 8. This experience pushed me to pursue writing because I wanted her to be my subject all the time.</p>
+
+        <p><strong>III. Current Chapter & Future Horizon</strong><br>
+        Today, I find myself in a season of learning. I am currently focused on myself. Looking ahead, I hope to live peacefully. I believe that life is a continuous process of becoming, and I am excited to see what the next chapter holds.</p>
+    </div>
+</div>
+
+
+<!-- GALLERY -->
+<div id="gallery" class="section">
+    <h1>MY GALLERY</h1>
+    <div class="gallery">
+        <div style="position:relative;"><span class="img-number">1</span><img src="pacs/pacs1.jpg" class="clickable"></div>
+        <div style="position:relative;"><span class="img-number">2</span><img src="pacs/pacs2.jpg" class="clickable"></div>
+    </div>
+</div>
+
+<!-- SONG -->
+<div id="song" class="section">
+    <h1>ABOUT SA IMO - THE 1975</h1>
+    <img src="pacs/pakyu.jpg" class="clickable"><br>
+    <a href="https://youtu.be/tGv7CUutzqU?si=eRL9D2vyRrrZDk-c" target="_blank" class="song-link">CLICK HERE PO :></a>
+</div>
+
+<!-- VIDEO -->
+<div id="video" class="section">
+    <h1>MY VIDEO</h1>
+    <video controls>
+        <source src="pacs/pacs3.mp4" type="video/mp4">     
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImg">
+</div>
+
+<!-- JS -->
+<script>
+// ====== SWITCH SECTIONS ======
+function show(id) {
+    document.querySelectorAll('.section').forEach(s => {
+        s.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+}
+
+// ====== MODAL FUNCTION ======
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+document.querySelectorAll('.clickable').forEach(img => {
+    img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = img.src;
+    });
+});
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+// ====== CLOSE MODAL ON BACKDROP CLICK ======
+modal.addEventListener('click', e => {
+    if(e.target === modal) modal.style.display = 'none';
+});
+</script>
+
+</body>
+</html>
+
+
+
+
